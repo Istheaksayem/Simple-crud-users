@@ -1,4 +1,5 @@
 import React, { use, useState } from 'react';
+import { Link } from 'react-router';
 
 const Users = ({ usersPromise }) => {
 
@@ -47,6 +48,9 @@ const Users = ({ usersPromise }) => {
             console.log('after delete',data)
             if(data.deletedCount){
                 alert('deleted successfully');
+                const remaining =users.filter(user =>user._id !==id);
+                setUsers(remaining)
+                // boshi nai
             }
         })
     }
@@ -68,6 +72,7 @@ const Users = ({ usersPromise }) => {
                         key={user._id}>
                         {user.name}:
                         {user.email}
+                        <Link to={`/users/${user._id}`}>Details</Link>
                         <button onClick={() => handleDeleteUser(user._id)}>x</button>
                         </p>)
                 }
